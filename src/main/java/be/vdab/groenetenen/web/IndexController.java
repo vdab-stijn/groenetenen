@@ -15,12 +15,12 @@ public class IndexController {
 		final int hour = LocalDateTime.now().getHour();
 		
 		if (hour >= 6 && hour < 12)
-			return "good morning";
+			return "goodMorning";
 		
 		if (hour >= 12 && hour < 18)
-			return "good afternoon";
+			return "goodAfternoon";
 		
-		return "good night";
+		return "goodNight";
 	}
 	
 	private static final String VIEW_INDEX	= "index";

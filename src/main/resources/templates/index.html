@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments::head(title='Green toes')"></head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title=#{greenToes})"></head>
 <body>
 	<nav th:replace='fragments::menu'></nav>
-	<h1>Green toes, <span th:text='${greeting}'></span>.</h1>
+	<h1><span th:text='#{greenToes}'></span>, <span th:text='#{${greeting}}'></span>.</h1>
 	
-	<blockquote>The landscaping of a nice lawn.</blockquote>
+	<blockquote th:text='#{landscaping}'></blockquote>
 	
 	<img alt="gazon" th:src='@{/images/gazon.jpg}' class="fullwidth">
 	
