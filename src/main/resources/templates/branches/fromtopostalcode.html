@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='From to postal code')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	<h1>From to postal code</h1>
+	
+	<form th:action='@{/branches}' th:object='${fromToPostalCodeForm}'
+		method='get'>
+		<label>From:
+		<span th:if="${#fields.hasErrors('from')}" th:errors='*{from}'></span>
+		<input th:field='*{from}' type='number' required
+			min='1000' max='9999' autofocus>
+		</label>
+		<label>To:
+		<span th:if="${#fields.hasErrors('to')}" th:errors='*{to}'></span>
+		<input th:field='*{to}' type='number' required
+			min='1000' max='9999'>
+		</label>
+		<input type='submit' value='Search'>
+	</form>
+	
+	<div th:each='branch:${branches}'>
+		<h2 th:text='${branch.name}'></h2>
+		<div th:text='|${branch.address.street} ${branch.address.number}|'></div>
+		<div th:text='|${branch.address.postalCode} ${branch.address.municipality}|'></div>
+	</div>
+</body>
+</html>
