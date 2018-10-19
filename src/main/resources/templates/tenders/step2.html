@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments::head(title='Add a tender: Step 2')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	
+	<h1>Add a tender: Step 2</h1>
+	
+	<form th:action='@(/tenders/add)' th:object='${tender}' method='post'>
+		<label>Area:
+		<span th:if="${#fields.hasErrors('area')}" th:errors='${area}'></span>
+		<input th:field='*{area}' type='number' required min='1' autofocus>
+		</label>
+		<input type='submit' value='Step 1' name='step1' formnovalidate>
+		<input type='submit' value='Save' name='save'>
+	</form>
+</body>
+</html>
