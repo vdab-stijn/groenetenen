@@ -57,7 +57,7 @@ public class Employee implements Serializable {
 	@Digits(integer = 10, fraction = 2)
 	@Column(name = "wedde")
 	private BigDecimal wages;
-	@Column(name = "rijksregisterNr")
+	@Column(name = "rijksregisterNr", unique = true)
 	private long socialSecurityNumber;
 	
 	protected Employee() {}

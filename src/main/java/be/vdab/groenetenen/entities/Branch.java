@@ -63,7 +63,7 @@ public class Branch implements Serializable {
 	@OneToMany(mappedBy = "branch")
 	private Set<Employee> employees;
 	
-	protected Branch() {}
+	public Branch() {}
 	public Branch(
 			final String name,
 			final boolean headBranch,
