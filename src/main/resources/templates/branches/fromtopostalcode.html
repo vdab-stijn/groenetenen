@@ -18,6 +18,10 @@
 			min='1000' max='9999'>
 		</label>
 		<input type='submit' value='Search'>
+		<div th:if='${#fields.hasGlobalErrors()}'>
+			<div class='fout' th:each='err: ${#fields.globalErrors()}'
+				th:text='${err}'></div>
+		</div>
 	</form>
 	
 	<div th:each='branch:${branches}'>

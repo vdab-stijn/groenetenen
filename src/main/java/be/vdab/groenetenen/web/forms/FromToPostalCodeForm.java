@@ -2,15 +2,17 @@ package be.vdab.groenetenen.web.forms;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Range;
+import be.vdab.groenetenen.constraints.FromToPostalCode;
+import be.vdab.groenetenen.constraints.PostalCode;
 
+@FromToPostalCode
 public class FromToPostalCodeForm {
 
 	@NotNull
-	@Range(min = 1000, max = 9999)
+	@PostalCode
 	private Integer from;
 	@NotNull
-	@Range(min = 1000, max = 9999)
+	@PostalCode
 	private Integer to;
 	
 	public void setFrom(final Integer from) {

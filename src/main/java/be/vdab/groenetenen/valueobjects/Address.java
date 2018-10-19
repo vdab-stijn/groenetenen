@@ -7,8 +7,9 @@ import javax.persistence.Embeddable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
+
+import be.vdab.groenetenen.constraints.PostalCode;
 
 @Embeddable
 public class Address implements Serializable {
@@ -25,7 +26,7 @@ public class Address implements Serializable {
 	@Column(name = "huisNr")
 	private String number;
 	@NotNull
-	@Range(min = 1000, max = 9999)
+	@PostalCode
 	@Column(name = "postcode")
 	private int postalCode;
 	@NotBlank
