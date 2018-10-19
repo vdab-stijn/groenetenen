@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -23,10 +25,16 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name = "werknemers")
+@NamedEntityGraph(name = Employee.WITH_BRANCH,
+	attributeNodes = @NamedAttributeNode("branch")
+)
 public class Employee implements Serializable {
 
 	/** Implements Serializable */
 	private static final long serialVersionUID = 80211790160757470L;
+	
+	// Entity graph
+	public static final String WITH_BRANCH = "Employee.withBranch";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

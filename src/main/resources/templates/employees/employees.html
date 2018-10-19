@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Employees')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	<h1>Employees</h1>
+	
+	<table>
+		<thead>
+			<tr>
+				<th><a th:href='@{/employees?sort=firstName}'>First name</a></th>
+				<th><a th:href='@{/employees?sort=lastName}'>Last name</a></th>
+				<th><a th:href='@{/employees?sort=branch}'>Branch</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each='employee:${page.content}'>
+				<td th:text='${employee.firstName}'></td>
+				<td th:text='${employee.lastName}'></td>
+				<td th:text='${employee.branch.name}'></td>
+		</tbody>
+	</table>
+	<p class="pagineren">
+		<span th:each='pageNr:${#numbers.sequence(1,page.totalPages)}'>
+			<span th:if='${pageNr - 1 == page.number}' th:text='${pageNr}'></span>
+			<a th:if='${pageNr - 1 != page.number}' th:text='${pageNr}'
+			th:href='@{/employees(page=${pageNr - 1},sort=${param.sort})}'></a>
+		</span>
+	</p>
+</body>
+</html>

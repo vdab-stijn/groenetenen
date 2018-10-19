@@ -8,5 +8,7 @@
 	<blockquote>The landscaping of a nice lawn.</blockquote>
 	
 	<img alt="gazon" th:src='@{/images/gazon.jpg}' class="fullwidth">
+	
+	<div th:if='${param.error != null}' th:text='${param.error}' class='fout'></div>
 </body>
 </html>

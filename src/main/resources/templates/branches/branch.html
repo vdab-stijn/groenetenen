@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Branch details for ${branch.name}')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	
+	<h1 th:text='${branch.name}'></h1>
+	
+	<dl>
+		<dt>Street</dt><dd th:text='${branch.address.street}'></dd>
+		<dt>Number</dt><dd th:text='${branch.address.number}'></dd>
+		<dt>Postal code</dt><dd th:text='${branch.address.postalCode}'></dd>
+		<dt>Municipality</dt><dd th:text='${branch.address.municipality}'></dd>
+		<dt>Type</dt>
+		<dd th:text="${branch.headBranch ? 'Head branch' : 'Daughter branch'}"></dd>
+		<dt>Building value</dt><dd th:text='${{branch.buildingValue}}'></dd>
+		<dt>Date commissioning</dt><dd th:text='${{branch.dateCommissioning}}'></dd>
+	</dl>
+</body>
+</html>

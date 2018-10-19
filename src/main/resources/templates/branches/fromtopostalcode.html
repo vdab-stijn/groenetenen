@@ -24,6 +24,7 @@
 		<h2 th:text='${branch.name}'></h2>
 		<div th:text='|${branch.address.street} ${branch.address.number}|'></div>
 		<div th:text='|${branch.address.postalCode} ${branch.address.municipality}|'></div>
+		<div><a th:href='@{/branches/{id}(id=${branch.id})}'>Details</a></div>
 	</div>
 </body>
 </html>
