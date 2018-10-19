@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment='head(title)'>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	
+	<link rel="icon" th:href='@{/images/groenetenen.ico}' type="image/x-icon">
+	<link rel="stylesheet" th:href='@{/css/groenetenen.css}' type="text/css">
+	
+	<title th:text='${title}'></title>
+</head>
+<body>
+	<nav th:fragment='menu'>
+		<ul>
+			<li><a th:href='@{/}'>&#8962;</a></li>
+			<li><a href='#'>Branches</a>
+				<ul>
+					<li><a th:href='@{/branches/fromtopostalcode}'>From to postal code</a></li>
+					<li><a th:href='@{/branches/byid}'>By id</a></li>
+				</ul>
+			</li>
+			<li><a href='#'>Employees</a>
+				<ul>
+					<li><a th:href='@{/employees}'>List</a></li>
+				</ul>
+			</li>
+			<li><a href='#'>Tenders</a>
+				<ul>
+					<li><a th:href='@{/tenders/add}'>Add</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</body>
+</html>

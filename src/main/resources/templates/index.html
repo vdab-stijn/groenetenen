@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='Green toes')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	<h1>Green toes, <span th:text='${greeting}'></span>.</h1>
+	
+	<blockquote>The landscaping of a nice lawn.</blockquote>
+	
+	<img alt="gazon" th:src='@{/images/gazon.jpg}' class="fullwidth">
+</body>
+</html>
