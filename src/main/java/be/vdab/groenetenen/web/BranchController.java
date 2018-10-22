@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import be.vdab.groenetenen.services.BranchService;
 import be.vdab.groenetenen.web.forms.FromToPostalCodeForm;
 
 @Controller
-@RequestMapping("branches")
+@RequestMapping(path = "branches", produces = MediaType.TEXT_HTML_VALUE)
 public class BranchController {
 
 	private final BranchService branchService;

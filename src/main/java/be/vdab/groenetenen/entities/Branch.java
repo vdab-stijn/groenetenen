@@ -20,15 +20,25 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import be.vdab.groenetenen.adapters.LocalDateAdapter;
 import be.vdab.groenetenen.valueobjects.Address;
 
 @Entity
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @Table(name = "filialen")
 public class Branch implements Serializable {
 
@@ -53,6 +63,7 @@ public class Branch implements Serializable {
 	@DateTimeFormat(style = "S-")
 	@NotNull
 	@Column(name = "ingebruikname")
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
 	private LocalDate dateCommissioning;
 	@Valid
 	@Embedded
@@ -61,6 +72,8 @@ public class Branch implements Serializable {
 	@Column(name = "versie")
 	private long version;
 	@OneToMany(mappedBy = "branch")
+	@XmlTransient
+	@JsonIgnore
 	private Set<Employee> employees;
 	
 	public Branch() {}
