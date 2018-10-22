@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,9 @@ import be.vdab.groenetenen.web.forms.FromToPostalCodeForm;
 @RequestMapping(path = "branches", produces = MediaType.TEXT_HTML_VALUE)
 public class BranchController {
 
+	private final Logger LOGGER
+	= LoggerFactory.getLogger(BranchController.class);
+	
 	private final BranchService branchService;
 	
 	public BranchController(final BranchService branchService) {
@@ -51,10 +56,10 @@ public class BranchController {
 	= "branches/branch";
 	public static final String REDIRECT_BRANCH_NOT_FOUND
 	= "redirect:/";
-	@GetMapping("{filiaal}")
+	@GetMapping("{branch}")
 	public ModelAndView read(
 			@PathVariable Optional<Branch> branch,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes) {LOGGER.debug("REQUEST: branch: " + branch.toString());
 		if (branch.isPresent())
 			return new ModelAndView(VIEW_BRANCH)
 					.addObject(branch.get());

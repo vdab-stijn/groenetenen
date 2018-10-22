@@ -13,7 +13,11 @@
 		<dt>Municipality</dt><dd th:text='${branch.address.municipality}'></dd>
 		<dt>Type</dt>
 		<dd th:text="${branch.headBranch ? 'Head branch' : 'Daughter branch'}"></dd>
-		<dt>Building value</dt><dd th:text='${{branch.buildingValue}}'></dd>
+		<dt>Building value</dt>
+			<!-- <dd th:text='${{branch.buildingValue}}'></dd> -->
+			<dd><span th:text='${{branch.buildingValue}}'></span>
+			<a th:href='@{/euro/{euro}/todollar(euro=${branch.buildingValue})}'>
+			$</a></dd>
 		<dt>Date commissioning</dt><dd th:text='${{branch.dateCommissioning}}'></dd>
 	</dl>
 </body>
