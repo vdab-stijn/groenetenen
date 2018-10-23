@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.mvcMatchers("/tenders/add").hasAuthority(MANAGER)
 			.mvcMatchers("/employees")
 				.hasAnyAuthority(STOCKKEEPER, HELPDESK)
-			.mvcMatchers("/", "/branches", "/login").permitAll()
+			.mvcMatchers("/", "/branches/**", "/login").permitAll()
 			.mvcMatchers("/**").authenticated();
 		
 		http.httpBasic();
