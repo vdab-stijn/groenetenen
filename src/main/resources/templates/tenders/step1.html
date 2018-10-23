@@ -16,7 +16,7 @@
 		<input th:field='*{lastName}' required>
 		</label>
 		<label>E-mail address:
-		<span th:if="${#fields.hasErrors('emailAddres')}" th:errors='*{emailAddress}'></span>
+		<span th:if="${#fields.hasErrors('emailAddress')}" th:errors='*{emailAddress}'></span>
 		<input th:field='*{emailAddress}' type='email' required>
 		</label>
 		<input type='submit' value='Step 2' name='step2'>

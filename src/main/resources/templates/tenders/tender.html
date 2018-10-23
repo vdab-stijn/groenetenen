@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments::head(title='Tender')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	
+	<h1 th:text="|Tender ${tender.id}|"></h1>
+	
+	<dl>
+		<dt>First name</dt><dd th:text='${tender.firstName}'></dd>
+		<dt>Last name</dt><dd th:text='${tender.lastName}'></dd>
+		<dt>Email address</dt><dd th:text='${tender.emailAddress}'></dd>
+		<dt>Area</dt><dd th:text='${tender.area}'></dd>
+		<dt>Date created</dt><dd th:text='${tender.dateCreated}'></dd>
+	</dl>
+</body>
+</html>

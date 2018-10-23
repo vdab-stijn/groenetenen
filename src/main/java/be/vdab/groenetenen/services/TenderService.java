@@ -7,5 +7,5 @@ import be.vdab.groenetenen.entities.Tender;
 public interface TenderService {
 
 	Optional<Tender> read(final long id);
-	void create(final Tender tender);
+	void create(final Tender tender, final String tenderURL);
 }

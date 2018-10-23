@@ -6,7 +6,7 @@
 	
 	<h1>Add a tender: Step 2</h1>
 	
-	<form th:action='@(/tenders/add)' th:object='${tender}' method='post'>
+	<form th:action='@{/tenders/add}' th:object='${tender}' method='post'>
 		<label>Area:
 		<span th:if="${#fields.hasErrors('area')}" th:errors='${area}'></span>
 		<input th:field='*{area}' type='number' required min='1' autofocus>

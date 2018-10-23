@@ -1,9 +1,12 @@
 package be.vdab.groenetenen.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,13 +50,25 @@ public class TenderController {
 	public String create(
 			@Validated(Tender.Step2.class) final Tender tender,
 			final BindingResult bindingResult,
-			final SessionStatus sessionStatus) {
+			final SessionStatus sessionStatus,
+			final HttpServletRequest request) {
 		if (bindingResult.hasErrors()) return VIEW_STEP_2;
 		
-		tenderService.create(tender);
+		final String tenderURL
+		= request.getRequestURL().toString().replace("add", "");
+		
+		tenderService.create(tender, tenderURL);
 		
 		sessionStatus.setComplete();
 		
 		return REDIRECT_AFTER_ADD;
+	}
+	
+	private static final String VIEW_TENDER
+	= "tenders/tender";
+	@GetMapping("{tender}")
+	public ModelAndView read(@PathVariable final Tender tender) {
+		return new ModelAndView(VIEW_TENDER)
+				.addObject(tender);
 	}
 }

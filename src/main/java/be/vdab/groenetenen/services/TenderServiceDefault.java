@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.groenetenen.entities.Tender;
+import be.vdab.groenetenen.mail.MailSender;
 import be.vdab.groenetenen.repositories.TenderRepository;
 
 @Service
@@ -14,9 +15,13 @@ import be.vdab.groenetenen.repositories.TenderRepository;
 public class TenderServiceDefault implements TenderService {
 
 	private final TenderRepository tenderRepository;
+	private final MailSender mailSender;
 	
-	public TenderServiceDefault(final TenderRepository tenderRepository) {
+	public TenderServiceDefault(
+			final TenderRepository tenderRepository,
+			final MailSender mailSender) {
 		this.tenderRepository = tenderRepository;
+		this.mailSender = mailSender;
 	}
 	
 	@Override
@@ -26,8 +31,11 @@ public class TenderServiceDefault implements TenderService {
 
 	@Override
 	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
-	public void create(Tender tender) {
+	public void create(final Tender tender, final String tenderURL) {
 		tenderRepository.save(tender);
+		
+		
+		mailSender.newTender(tender, tenderURL);
 	}
 
 }

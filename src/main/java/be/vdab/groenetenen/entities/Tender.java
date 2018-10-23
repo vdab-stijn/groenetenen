@@ -74,7 +74,7 @@ public class Tender implements Serializable {
 	public void setEmailAddress(final String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
-	public String getEmailAdress() {
+	public String getEmailAddress() {
 		return emailAddress;
 	}
 	
