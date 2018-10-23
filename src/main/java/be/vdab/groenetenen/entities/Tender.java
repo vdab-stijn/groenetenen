@@ -12,13 +12,19 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import be.vdab.groenetenen.adapters.LocalDateAdapter;
+
 @Entity
 @Table(name = "offertes")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Tender implements Serializable {
 
 	/** Implements Serializable */
@@ -49,6 +55,7 @@ public class Tender implements Serializable {
 	private Integer area;
 	@DateTimeFormat(style = "S-")
 	@Column(name = "aangemaakt")
+	@XmlJavaTypeAdapter(value= LocalDateAdapter.class)
 	private LocalDate dateCreated = LocalDate.now();
 	
 	public Tender() {}
