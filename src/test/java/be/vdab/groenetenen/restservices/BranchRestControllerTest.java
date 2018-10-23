@@ -16,6 +16,9 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.Base64Utils;
+
+import com.google.common.net.HttpHeaders;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,7 +40,9 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 		final long id = idTestBranch();
 		
 		mvc.perform(get("/branches/" + id)
-				.accept(MediaType.APPLICATION_XML))
+			.header(HttpHeaders.AUTHORIZATION,
+				"Basic " + Base64Utils.encodeToString("joe:theboss".getBytes()))
+			.accept(MediaType.APPLICATION_XML))
 			.andExpect(status().isOk())
 			.andExpect(content()
 				.contentTypeCompatibleWith(MediaType.APPLICATION_XML))
@@ -50,6 +55,8 @@ extends AbstractTransactionalJUnit4SpringContextTests {
 		final long id = idTestBranch();
 		
 		mvc.perform(get("/branches/" + id)
+			.header(HttpHeaders.AUTHORIZATION,
+				"Basic " + Base64Utils.encodeToString("joe:theboss".getBytes()))
 				.accept(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(content()

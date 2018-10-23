@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th='http://www.thymeleaf.org' lang='en'>
+	<head th:replace="fragments::head(title='403 - Access forbidden')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	
+	<h1>You can't view that page with the credentials you provided</h1>
+	
+	<p>Please make sure you typed in the correct username and password.</p>
+	
+	<img alt="403 - Access forbidden" th:src='@{/images/403.jpg}'>
+</body>
+</html>

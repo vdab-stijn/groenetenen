@@ -132,4 +132,8 @@ public class Branch implements Serializable {
 	public Set<Employee> getEmployees() {
 		return Collections.unmodifiableSet(employees);
 	}
+	
+	public void depreciate() {
+		buildingValue = BigDecimal.ZERO;
+	}
 }

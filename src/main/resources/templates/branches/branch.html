@@ -20,5 +20,10 @@
 			$</a></dd>
 		<dt>Date commissioning</dt><dd th:text='${{branch.dateCommissioning}}'></dd>
 	</dl>
+	
+	<form th:action='@{/branches/{id}/depreciate(id=${branch.id})}'
+		method='post'>
+		<input type='submit' th:value='#{depreciate}'>
+	</form>
 </body>
 </html>

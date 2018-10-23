@@ -3,6 +3,7 @@ package be.vdab.groenetenen.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ public class BranchServiceDefault implements BranchService {
 	}
 	
 	@Override
+	@PreAuthorize("hasAuthority('manager')")
 	public List<Branch> findByPostalCode(int from, int to) {
 		return branchRepository
 			.findByAddressPostalCodeBetweenOrderByAddressPostalCode(from, to);
@@ -55,5 +57,11 @@ public class BranchServiceDefault implements BranchService {
 		}
 		
 		branchRepository.deleteById(id);
+	}
+
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+	public void depreciate(long id) {
+		branchRepository.findById(id).ifPresent(branch -> branch.depreciate());
 	}
 }

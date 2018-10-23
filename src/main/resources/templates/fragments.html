@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment='head(title)'>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -19,7 +20,7 @@
 					<li><a th:href='@{/branches/byid}'>By id</a></li>
 				</ul>
 			</li>
-			<li><a href='#'>Employees</a>
+			<li sec:authorize-url='/employees'><a href='#'>Employees</a>
 				<ul>
 					<li><a th:href='@{/employees}'>List</a></li>
 				</ul>
@@ -32,6 +33,14 @@
 			<li><a th:href='@{?locale=en_BE}'>EN</a></li>
 			<li><a th:href='@{?locale=nl_BE}'>NL</a></li>
 			<li><a th:href='@{?locale=fr_BE}'>FR</a></li>
+			<li sec:authorize='isAnonymous()'>
+				<a th:href='@{/login}'>Login</a>
+			</li>
+			<li sec:authorize='isAuthenticated()'>
+				<form method="post" th:action='@{/logout}' id='logoutform'>
+					<input type='submit' value='Logout' id='logoutbutton'>
+				</form>
+			</li>
 		</ul>
 	</nav>
 </body>
