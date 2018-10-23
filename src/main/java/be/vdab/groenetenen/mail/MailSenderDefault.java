@@ -5,9 +5,11 @@ import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import be.vdab.groenetenen.entities.Tender;
@@ -20,12 +22,18 @@ public class MailSenderDefault implements MailSender {
 	= LoggerFactory.getLogger(MailSenderDefault.class);
 	
 	private final JavaMailSender sender;
+	private final String emailAddressWebmaster;
 	
-	public MailSenderDefault(final JavaMailSender sender) {
+	public MailSenderDefault(
+			final JavaMailSender sender,
+			@Value("${emailAddressWebmaster}")
+				final String emailAddressWebmaster) {
 		this.sender = sender;
+		this.emailAddressWebmaster = emailAddressWebmaster;
 	}
 
 	@Override
+	@Async
 	public void newTender(final Tender tender, final String tenderURL) {
 		try {
 //			final SimpleMailMessage message = new SimpleMailMessage();
@@ -56,4 +64,25 @@ public class MailSenderDefault implements MailSender {
 		}
 	}
 
+	@Override
+	public void countTendersMail(final long count) {
+		try {
+			final MimeMessage message = sender.createMimeMessage();
+			final MimeMessageHelper helper = new MimeMessageHelper(message);
+			
+			helper.setTo(emailAddressWebmaster);
+			helper.setSubject("Tender count");
+			
+			helper.setText("Number of tenders:<strong>" + count + "</strong",
+					true);
+			
+			sender.send(message);
+		}
+		catch (final MessagingException | MailException ex) {
+			final String error = "Can't send tender count mail";
+			LOGGER.error(error, ex);
+			
+			throw new UnableToSendMailException(error, ex);
+		}
+	}
 }

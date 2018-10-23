@@ -2,6 +2,7 @@ package be.vdab.groenetenen.services;
 
 import java.util.Optional;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,13 @@ public class TenderServiceDefault implements TenderService {
 		
 		
 		mailSender.newTender(tender, tenderURL);
+	}
+
+	@Override
+	// Test every minute
+	@Scheduled(/*cron = "0 0/1 * 1/1 * ? * "*/ fixedRate=60000)
+	public void countTendersMail() {
+		mailSender.countTendersMail(tenderRepository.count());
 	}
 
 }
