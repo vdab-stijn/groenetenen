@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th='http://www.thymeleaf.org' lang='en'>
+	<head th:replace="fragments::head(title='500 - Server problem')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	
+	<h1>An error occurred</h1>
+	
+	<p>We cannot process your request due to a technical problem.<br />
+	Please contact the helpdesk.</p>
+	
+	<img alt="500 - Server problem" th:src='@{/images/500.jpg}'>
+</body>
+</html>
