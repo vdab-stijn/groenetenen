@@ -68,4 +68,11 @@ public class BranchController {
 		
 		return new ModelAndView(REDIRECT_BRANCH_NOT_FOUND);
 	}
+	
+	private static final String VIEW_BY_ID
+	= "branches/byid";
+	@GetMapping("byid")
+	public String findById() {
+		return VIEW_BY_ID;
+	}
 }

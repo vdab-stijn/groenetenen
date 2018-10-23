@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments::head(title='Branches by id')"></head>
+<body>
+	<nav th:replace='fragments::menu'></nav>
+	
+	<h1>Branches by id</h1>
+	
+	<label>Id:
+	<input id='branchId' required type='number' min='1' autofocus></label>
+	<button id='search'>Search</button>
+	
+	<dl>
+		<dt>Name</dt><dd id='name'></dd>
+		<dt>Address</dt><dd id='address'></dd>
+	</dl>
+	
+	<script th:src='@{/scripts/byid.js}'></script>
+</body>
+</html>
